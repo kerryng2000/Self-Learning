@@ -1,0 +1,27 @@
+1import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Stock {
+	public static void main(String[] args) throws FileNotFoundException {
+		
+		Double[] price = new Double[50];
+		int counter = 0;
+		File file = new File("stock15.txt");
+		Scanner scanner = new Scanner(file);
+		while(scanner.hasNextLine())
+		{
+			price[counter] = Double.parseDouble(scanner.nextLine());
+			counter++;
+		}
+		for(Double i : price)
+		{
+			int stars = (int)Math.round(i);
+			for(int count = 0; count < stars; count++)
+			{
+				System.out.print("*");
+			}
+			System.out.println("\n");
+		}
+	}
+}
