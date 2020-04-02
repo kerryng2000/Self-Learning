@@ -1,0 +1,58 @@
+import java.util.*;
+
+
+public class LinkedList {
+	private static Node root;
+
+	private static class Node {
+		int data;
+		Node next;
+		Node prev;
+
+		public Node(int data) {
+
+			this.data = data;
+			next = null;
+			prev = null;
+		}
+	}
+
+	private static LinkedList Reverse(LinkedList list) {
+		LinkedList newlist = new LinkedList();
+		Node temp = list.root;
+		Node last = null;
+		while(temp != null)
+		{
+			last = temp;
+			temp = temp.next;
+		}
+		newlist.root = last;
+		while(last != null)
+		{
+			last.next = last.prev;
+			last = last.prev;
+		}
+		return newlist;
+
+	}
+
+	public static void main(String[] args) {
+		LinkedList list = new LinkedList();
+		list.root = new Node(1);
+		Node second = new Node(2);
+		root.next = second;
+		second.prev = root;
+		Node third = new Node(3);
+		second.next = third;
+		third.prev = second;
+		list = Reverse(list);
+		Node temp = list.root;
+		while(temp != null)
+		{
+			System.out.println(temp.data);
+			temp = temp.next;
+		}
+
+	}
+
+}
