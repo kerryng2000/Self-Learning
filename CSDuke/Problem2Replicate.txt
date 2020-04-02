@@ -1,0 +1,59 @@
+import java.util.*;
+import java.util.NoSuchElementException;
+
+public class LinkedList {
+
+	private Node root;
+
+	private static class Node {
+		String data;
+		Node next;
+
+		public Node(String data) {
+			this.data = data;
+			next = null;
+		}
+	}
+
+	public static LinkedList Replicate(LinkedList list, int count) {
+
+		LinkedList Newlist = new LinkedList();
+		Newlist.root = list.root;
+		Node Newhead = Newlist.root;
+		Node temp = list.root;
+		while (temp != null) {
+			for (int i = 0; i < count; i++) {
+				insert(Newhead, temp.data);
+			}
+			temp = temp.next;
+		}
+		return list;
+	}
+	public static void insert(Node prev, String newdata)
+	{
+		Node newnode = new Node(newdata);
+		newnode.next = prev.next;
+		prev.next = newnode;
+	}
+
+	public static void main(String[] args) {
+		LinkedList list = new LinkedList();
+		list.root = new Node("TSM");
+		Node second = new Node("C9");
+		Node third = new Node("TL");
+		list.root.next = second;
+		second.next = third;
+		Node n = list.root;
+		int count = 0;
+		while (n != null) {
+			count++;
+			n = n.next;
+		}
+		list = Replicate(list, count);
+		n = list.root;
+		while (n != null) {
+			System.out.println(n.data);
+			n = n.next;
+		}
+	}
+}
