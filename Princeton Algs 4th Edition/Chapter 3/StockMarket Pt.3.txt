@@ -1,0 +1,70 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+public class Stock {
+	public static void main(String[] args) throws FileNotFoundException {
+		DecimalFormat df = new DecimalFormat("###.###");
+		double[] price = new double[15];
+		int counter = 0;
+		double cash = 10000;
+		double value = cash;
+		double shares = 0;
+		File file = new File("stock15.txt");
+		Scanner scanner = new Scanner(file);
+		while(scanner.hasNextLine())
+		{
+			price[counter] = Double.parseDouble(scanner.nextLine());
+			counter++;
+		}
+		int up = 0;
+		int down = 0;
+		System.out.println("1" + "  "+ price[0] + "\n");
+		for(int i = 1; i < price.length; i++)
+		{
+			System.out.print(i + 1 + "  ");
+			double test = price[i - 1]; // prev price
+			System.out.print(price[i] + "  ");
+			if(price[i] > test) // if current price is greater than prev
+			{
+				if(down == 3) // check history
+				{
+					shares = cash/ price[i];
+					cash = 0;
+					down = 0;
+					up++;
+					System.out.println("Cash: " + df.format(cash) + " Shares: " + df.format(shares) + " Value: " + df.format(value));
+				}
+				else
+				{
+					down = 0; 
+					value = shares * price[i];
+					up++; 
+					System.out.println("Cash: " + df.format(cash) + " Shares: " + df.format(shares)+ " Value: " + df.format(value));
+				
+				}
+			}
+			else
+			{
+				if(up >= 3)
+				{
+					cash = price[i] * shares;
+					shares = 0;
+					value = cash;
+					up = 0;
+					down++;
+					System.out.println("Cash: " + df.format(cash) + " Shares: " + df.format(shares) + " Value: " + df.format(value));
+				}
+				else
+				{
+					up = 0;
+					down++;
+					System.out.println("Cash: " + df.format(cash) + " Shares: " + df.format(shares) + " Value: " +df.format(value));
+				
+				}
+			}
+			System.out.println("\n");
+		}
+	}
+}
