@@ -1,0 +1,22 @@
+package Chapter1;
+
+public class Counter {
+	
+	private String s;
+	private int count;
+	
+	public Counter(String s)
+	{
+		this.s = s;
+	}
+	public int tally()
+	{
+		return s.length();
+	}
+	
+	public static void main(String[] args)
+	{
+		Counter head = new Counter("Head");
+		System.out.println("The number of letters in head is: " + head.tally());
+	}
+}
