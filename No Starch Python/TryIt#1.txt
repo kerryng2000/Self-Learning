@@ -1,0 +1,18 @@
+message = "Hello Eric"
+print (message)
+
+print(message.lower())
+print(message.upper())
+print(message.title())
+
+message_2 = "Michael Jordan once said, 'To be or not to be'"
+print(message_2);
+
+famousperson = "Lebron James"
+message = "Respect"
+print(famousperson + "\t"+ message);
+
+message = " TSM "
+print(message.lstrip());
+print(message.strip());
+print(message.rstrip());
